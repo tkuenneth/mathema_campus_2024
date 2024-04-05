@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>CounterDemo Web</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <p id="a">&nbsp;</p>
+        <p id="b">&nbsp;</p>
+    </div>
+
+    <script>
+        createLoop(10, 20, "a", 2000)();
+        createLoop(20, 25, "b", 4000)();
+
+        function createLoop(start, end, id, delay) {
+            return async function () {
+                while (start <= end) {
+                    document.getElementById(id).innerText = `${start}`;
+                    start = await increaseCounter(start, delay);
+                }
+            };
+        }
+
+        function increaseCounter(current, delay) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(current + 1);
+                }, delay);
+            });
+        }
+
+    </script>
+
+</body>
+</html>
