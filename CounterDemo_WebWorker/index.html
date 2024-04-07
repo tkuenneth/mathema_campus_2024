@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <title>CounterDemo WebWorker</title>
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <p id="a">&nbsp;</p>
+        <p id="b">&nbsp;</p>
+    </div>
+
+    <script>
+        const workerA = new Worker("./worker.js");
+        const workerB = new Worker("./worker.js");
+        workerA.onmessage = (event) => {
+            document.getElementById("a").innerHTML = event.data;
+        };
+        workerB.onmessage = (event) => {
+            document.getElementById("b").innerHTML = event.data;
+        };
+        workerA.postMessage({start: 10, end: 20, delay: 2000});
+        workerB.postMessage({start: 20, end: 25, delay: 4000});
+    </script>
+
+</body>
+</html>
